@@ -28,7 +28,7 @@ var Client = (function() {
     that.start = function(host, port) {
         that.connect(host, port);
 
-        SoundManager.preloadSound("../sounds/hallelujah.mp3", "nodeflake");
+        SoundManager.preloadSound("/nodeflakes-client/sounds/hallelujah.mp3", "nodeflake");
         SoundManager.playSound('nodeflake');
         SoundManager.pauseSound('nodeflake');
 
