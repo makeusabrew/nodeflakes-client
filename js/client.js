@@ -22,36 +22,20 @@ window.cancelRequestAnimFrame = ( function() {
 
 var Client = (function() {
     var socket = null,
-        _host = null,
-        _port = null;
 
     var that = {};
 
-    that.start = function(host, port) {
-        _host = host;
-        _port = port;
-
+    that.start = function() {
         that.connect();
 
-        SoundManager.preloadSound("http://"+_host+":"+_port+"/sounds/hallelujah.mp3", "nodeflake");
         SoundManager.playSound('nodeflake');
         SoundManager.pauseSound('nodeflake');
 
         Engine.start();
     }
 
-    that.getHost = function() {
-        return _host;
-    }
-
-    that.getPort = function() {
-        return _port;
-    }
-
     that.connect = function() {
-        socket = io.connect("http://"+_host, {
-            port: _port
-        });
+        socket = io.connect();
 
         socket.on('connect', function() {
             console.log("connected");
