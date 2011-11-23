@@ -21,21 +21,22 @@ window.cancelRequestAnimFrame = ( function() {
 
 
 var Client = (function() {
-    var socket = null,
+    var socket = null;
 
     var that = {};
 
-    that.start = function() {
-        that.connect();
+    that.start = function(host, port) {
+        that.connect(host, port);
 
+        SoundManager.preloadSound("sounds/hallelujah.mp3", "nodeflake");
         SoundManager.playSound('nodeflake');
         SoundManager.pauseSound('nodeflake');
 
         Engine.start();
     }
 
-    that.connect = function() {
-        socket = io.connect();
+    that.connect = function(host, port) {
+        socket = io.connect("http://"+host, {port: port});
 
         socket.on('connect', function() {
             console.log("connected");

@@ -8,13 +8,14 @@
         <h1>Nodeflakes Client</h1>
         <p>Foo</p>
         <script src="http://localhost:7979/socket.io/socket.io.js"></script>
+        <script src="js/jquery-1.7.min.js"></script>
         <script src="js/engine.js"></script>
         <script src="js/sound_manager.js"></script>
         <script src="js/flake.js"></script>
         <script src="js/client.js"></script>
         <script>
             $(function() {
-                Client.start();
+                Client.start("localhost", 7979);
             });
         </script>
     </body>
