@@ -1,5 +1,5 @@
-body {
-    overflow-x: hidden; /* @todo improve this */
+html {
+    overflow-x: hidden !important; /* @todo improve this */
 }
 
 .flake,
@@ -91,7 +91,7 @@ body {
 }
 
 .animated {
-    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
 }
 
@@ -112,5 +112,3 @@ body {
     text-decoration:none;
     margin: 1em;
 }
-
-
