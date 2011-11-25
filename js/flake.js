@@ -49,7 +49,9 @@ Flake.prototype = {
             }
             SoundManager.playSound('nodeflake');
         } else {
-            content = "<div class='flake'>&lowast;</div>"
+            // 10052 and 10053 are unicode snowflake indices
+            var fIndex = 10052 + Math.floor(Math.random()*2);
+            content = "<div class='flake'>&#"+fIndex+";</div>";
         }
 
         this.elem = $(
