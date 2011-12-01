@@ -28,7 +28,7 @@ var Engine = (function(win, doc) {
         }
 
         var x = Math.floor(
-            Math.random() * _win.width() - size
+            10 + Math.random() * _win.width() - size - 20
         );
 
         // we used to make Y a bit random, but if users are looking out for their tweets
