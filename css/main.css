@@ -96,14 +96,13 @@ html {
 }
 
 #actions {
-    opacity:0.9;
     position:fixed;
     bottom:0;
     right:0;
     padding:0.25em;
-    border-top-left-radius:11px;
-    -moz-border-top-left-radius:11px;
-    background:#222;
+    border-top-left-radius:8px;
+    -moz-border-top-left-radius:8px;
+    background:#111;
     color:#fff;
 }
 
