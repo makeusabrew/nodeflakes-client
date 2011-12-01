@@ -3,6 +3,8 @@ var Flake = function() {
     this.y = 0;
     this.vx = 0;
     this.vy = 0;
+    this.width = 0;
+    this.height = 0;
     this.maxVelocity = 0;
     this.size = 0;
     this.elem = null;
@@ -61,6 +63,7 @@ Flake.prototype = {
             "top": this.y,
             "font-size": this.size+"px"
         });
+
         
         if (Engine.setting('animations')) {
             this.animate();
@@ -72,6 +75,9 @@ Flake.prototype = {
 
 
         Engine.getElement().append(this.elem);
+
+        this.width = this.elem.width();
+        this.height = this.elem.height();
         this.position = this.elem.get(0).style;
 
         // wire up hover handlers
@@ -90,7 +96,9 @@ Flake.prototype = {
     animate: function() {
         this.elem.css({
             "-webkit-animation-name": "rotate-"+this.rotationDir,
-            "-webkit-animation-duration": this.rotationSpeed+"s"
+            "-webkit-animation-duration": this.rotationSpeed+"s",
+            "-moz-animation-name": "rotate-"+this.rotationDir,
+            "-moz-animation-duration": this.rotationSpeed+"s"
         }).addClass("animated");
     },
 
@@ -125,11 +133,11 @@ Flake.prototype = {
     },
 
     getBottom: function() {
-        return this.y + this.size;
+        return this.y + this.height;
     },
 
     getRight: function() {
-        return this.x + this.size;
+        return this.x + this.width;
     },
 
     isDying: function() {
@@ -180,7 +188,7 @@ Flake.prototype = {
         // ensure tweet is rendered within bounds
 
         // ideally we want the tweet to render half way down the flake
-        var idealTop = this.y + (this.size / 2) - (elem.height() / 2);
+        var idealTop = this.y + (this.height / 2) - (elem.height() / 2);
         if (idealTop >= 0) {
             // but only if it keeps the whole tweet on screen
             position.top = idealTop;

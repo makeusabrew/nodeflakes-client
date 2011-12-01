@@ -102,6 +102,7 @@ var Engine = (function(win, doc) {
             "</div>"
         );
         $("#actions a").click(function(e) {
+            e.preventDefault();
             var setting = $(this).attr('class');
             _settings[setting] = !_settings[setting];
             var enabled = _settings[setting];
