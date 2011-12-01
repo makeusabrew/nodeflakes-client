@@ -33,7 +33,7 @@ Flake.prototype = {
 
         // a little bit of vertical spice
         // we've de-spiced a lot so users can see their tweets quicker. Boring.
-        this.vy = -1 + Math.random() * 2;
+        this.vy = Math.random() * 2;
 
         this.maxVx = 15 + Math.random() * 40;
 
@@ -42,7 +42,7 @@ Flake.prototype = {
         this.rotationSpeed = 8 + Math.floor(Math.random()*24);
 
         if (this.tweet.text.search(/#nodeflakes/i) != -1) {
-            content = "<div class='node flake'>☃</div>";
+            content = "<div class='node flake'>&#10052;</div>";
             if (this.size < 20) {
                 this.y -= 20 - this.size;
                 this.size = 20;
