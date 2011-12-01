@@ -16,7 +16,7 @@ html {
 }
 
 .flake.node {
-    color: #ff0;
+    color: #FFD700;
     font-weight:bold;
 }
 
@@ -80,10 +80,6 @@ html {
     to { 
         -webkit-transform: rotate(0deg);
     }
-}
-
-.flake
-{
 }
 
 .threedee {
