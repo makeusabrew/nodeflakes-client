@@ -85,13 +85,34 @@ html {
     }
 }
 
+@-moz-keyframes rotate-clockwise {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to { 
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotate-anticlockwise {
+    from {
+        -moz-transform: rotate(360deg);
+    }
+    to { 
+        -moz-transform: rotate(0deg);
+    }
+}
+
 .threedee {
     -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
 }
 
 .animated {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
 }
 
 #actions {
