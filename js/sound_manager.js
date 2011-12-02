@@ -26,7 +26,7 @@ var SoundManager = (function() {
 
             _loadedSounds[path] = sound;
         } else {
-            console.log("not preloading sound - already loaded ["+path+"]");
+            //console.log("not preloading sound - already loaded ["+path+"]");
         }
 
         if (alias != null) {
@@ -44,7 +44,7 @@ var SoundManager = (function() {
             if (_aliases[path] != null) {
                 path = _aliases[path];
             } else {
-                console.log("warning - "+path+" was not preloaded - aborting");
+                //console.log("warning - "+path+" was not preloaded - aborting");
                 return;
             }
                 
