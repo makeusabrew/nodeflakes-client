@@ -4,7 +4,8 @@ var SoundManager = (function() {
     var _loadedSounds = {},
         _aliases = {},
         _muted = false,
-        _booted = false;
+        _booted = false,
+        _available = (typeof Audio == 'function');
 
     self.toggleSounds = function() {
         _muted = !_muted;
@@ -19,6 +20,9 @@ var SoundManager = (function() {
     }
 
     self.preloadSound = function(path, alias) {
+        if (!_available) {
+            return;
+        }
         if (_loadedSounds[path] == null) {
 
             var sound = new Audio(path);
@@ -35,6 +39,9 @@ var SoundManager = (function() {
     }
 
     self.playSound = function(path) {
+        if (!_available) {
+            return;
+        }
         if (_muted) {
             return;
         }
@@ -53,6 +60,9 @@ var SoundManager = (function() {
     }
 
     self.pauseSound = function(path) {
+        if (!_available) {
+            return;
+        }
         if (_muted) {
             return;
         }
