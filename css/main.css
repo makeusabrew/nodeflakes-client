@@ -140,3 +140,8 @@ html {
 #actions a span {
     font-weight:bold;
 }
+
+#weather {
+    display:inline-block;
+    width:50px;
+}

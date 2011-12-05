@@ -26,9 +26,10 @@ var Engine = (function(win, doc) {
             "0":  "none",
             "2":  "light",
             "5":  "medium",
-            "8": "heavy",
-            "12": "blizzard"
+            "9": "heavy",
+            "14": "blizzard"
         },
+        _maxFlakes = 300,
         _win = $(win);
 
     that.addRandomlyPositionedTweet = function(data) {
@@ -55,6 +56,18 @@ var Engine = (function(win, doc) {
 
         _flakes.push(flake);
         _flakesSinceReport ++;
+        var j = _flakes.length;
+        if (j > _maxFlakes) {
+            var f;
+            for (var i = 0; i < j; i++) {
+                f = _flakes[i];
+                if (f.isDying() || f.isDead()) {
+                    continue;
+                }
+                f.startDeath(1000);
+                break;
+            }
+        }
     }
 
     that.loop = function() {
@@ -64,7 +77,11 @@ var Engine = (function(win, doc) {
             var _flakesPerSec = _flakesSinceReport / (_reportInterval / 1000);
             for (var i in _weatherLevels) {
                 if (_flakesPerSec <= i) {
-                    document.getElementById("weather").innerHTML = _weatherLevels[i];
+                    if ($("#weather span").html() != _weatherLevels[i]) {
+                        $("#weather span").fadeOut(500, function() {
+                            $(this).html(_weatherLevels[i]).fadeIn(500);
+                        });
+                    }
                     break;
                 }
             }
@@ -118,7 +135,7 @@ var Engine = (function(win, doc) {
     that.addControlPanel = function() {
         that.getElement().prepend(
             "<div id='actions'>"+
-                "<span>Current snowfall: <span id='weather'>none</span>"+
+                "<span>Current snowfall: <span id='weather'><span>none</span></span>"+
                 "<a class='snowflakes' href='#'>Snowflakes: <span>on</span></a>"+
                 "<a class='sounds' href='#'>#nodeflakes sounds: <span>on</span></a>"+
                 "<a class='animations' href='#'>CSS Animations: <span>on</span></a>"+
