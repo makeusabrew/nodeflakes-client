@@ -44,18 +44,23 @@ Flake.prototype = {
         this.rotationSpeed = 8 + Math.floor(Math.random()*24);
 
         if (this.tweet.text.search(/#nodeflakes/i) != -1) {
+            SoundManager.playSound('nodeflake');
             content = "<div class='node flake'>&#10052;</div>";
             if (this.size < 20) {
                 this.y -= 20 - this.size;
                 this.size = 20;
             }
-            SoundManager.playSound('nodeflake');
+            // reset X
+            var v = Engine.getViewport();
+            // dead centre
+            this.x = (v.w / 2) - (this.size / 2);
+            // +/- 50% width
+            this.x += -(v.w / 4) + ((v.w / 2) * Math.random());
         } else {
             // 10052 and 10053 are unicode snowflake indices
             var fIndex = 10052 + Math.floor(Math.random()*2);
             content = "<div class='flake'>&#"+fIndex+";</div>";
         }
-
         this.elem = $(
             content
         ).css({
