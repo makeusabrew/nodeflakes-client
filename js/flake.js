@@ -80,6 +80,13 @@ Flake.prototype = {
         this.height = this.elem.height();
         this.position = this.elem.get(0).style;
 
+        // this is less than ideal, but since size != height anymore, we have to re-adjust that a bit
+        // really, you'd want the engine to do this, but it doesn't know about our internal *actual* w / h
+        if (this.height > this.size) {
+            var adjust = this.height - this.size;
+            this.position.top -= adjust;
+        }
+
         // wire up hover handlers
         var that = this;
 
