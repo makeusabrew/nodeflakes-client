@@ -35,7 +35,7 @@ Flake.prototype = {
 
         // a little bit of vertical spice
         // we've de-spiced a lot so users can see their tweets quicker. Boring.
-        this.vy = Math.random() * 2;
+        this.vy = 0.1 + Math.random() * 2;
 
         this.maxVx = 15 + Math.random() * 40;
 

@@ -19,6 +19,16 @@ var Engine = (function(win, doc) {
             animations: true,
             acceleration: true
         },
+        _lastWeatherReport = null,
+        _reportInterval = 4000,
+        _flakesSinceReport = 0,
+        _weatherLevels = {
+            "0":  "none",
+            "2":  "light",
+            "5":  "medium",
+            "8": "heavy",
+            "12": "blizzard"
+        },
         _win = $(win);
 
     that.addRandomlyPositionedTweet = function(data) {
@@ -44,10 +54,23 @@ var Engine = (function(win, doc) {
         });
 
         _flakes.push(flake);
+        _flakesSinceReport ++;
     }
 
     that.loop = function() {
         _tickTime = new Date().getTime();
+        if (_tickTime >= _lastWeatherReport + _reportInterval) {
+            // update!
+            var _flakesPerSec = _flakesSinceReport / (_reportInterval / 1000);
+            for (var i in _weatherLevels) {
+                if (_flakesPerSec <= i) {
+                    document.getElementById("weather").innerHTML = _weatherLevels[i];
+                    break;
+                }
+            }
+            _flakesSinceReport = 0;
+            _lastWeatherReport = _tickTime;
+        }
         // we want a delta in *seconds*, to make it easier to scale our values
         _delta = (_tickTime - _lastTick) / 1000;
         _lastTick = _tickTime;
@@ -66,7 +89,7 @@ var Engine = (function(win, doc) {
             flake = _flakes[i];
             flake.tick(_delta);
 
-            if (!flake.isDying() && flake.getProjectedBottom(2000) >= _height) {
+            if (!flake.isDying() && flake.getProjectedBottom(2500) >= _height) {
                 flake.startDeath(2000);
             }
 
@@ -95,10 +118,11 @@ var Engine = (function(win, doc) {
     that.addControlPanel = function() {
         that.getElement().prepend(
             "<div id='actions'>"+
-                "<a class='snowflakes' href='#'>Snowflakes: <span>On</span></a>"+
-                "<a class='sounds' href='#'>Sounds: <span>On</span></a>"+
-                "<a class='animations' href='#'>CSS Animations: <span>On</span></a>"+
-                "<a class='acceleration' href='#'>3D Acceleration: <span>On</span></a>"+
+                "<span>Current snowfall: <span id='weather'>none</span>"+
+                "<a class='snowflakes' href='#'>Snowflakes: <span>on</span></a>"+
+                "<a class='sounds' href='#'>#nodeflakes sounds: <span>on</span></a>"+
+                "<a class='animations' href='#'>CSS Animations: <span>on</span></a>"+
+                "<a class='acceleration' href='#'>3D Acceleration: <span>on</span></a>"+
             "</div>"
         );
         $("#actions a").click(function(e) {
@@ -149,11 +173,12 @@ var Engine = (function(win, doc) {
                     break;
             }
 
-            $(this).children("span").html(enabled ? "On" : "Off");
+            $(this).children("span").html(enabled ? "on" : "off");
         });
     }
 
     that.start = function() {
+        _lastWeatherReport = new Date().getTime();
         _element = $("body");
         that.addControlPanel();
         _height = $(doc).height();

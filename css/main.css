@@ -132,3 +132,11 @@ html {
     text-decoration:none;
     margin: 1em;
 }
+
+#actions a:hover {
+    color:#ccc;
+}
+
+#actions a span {
+    font-weight:bold;
+}
