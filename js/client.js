@@ -19,6 +19,11 @@ window.cancelRequestAnimFrame = ( function() {
         clearTimeout
 })();
 
+if (typeof console == 'undefined') {
+    console = {
+        log: function() {}
+    };
+}
 
 var Client = (function() {
     var socket = null;
@@ -39,13 +44,13 @@ var Client = (function() {
         socket = io.connect("http://"+host, {port: port});
 
         socket.on('connect', function() {
-            //console.log("connected");
+            console.log("connected");
             socket.on('tweet', function(tweet) {
                 var data = null;
                 try {
                     data = JSON.parse(tweet);
                 } catch (e) {
-                    //console.log("could not parse tweet: "+tweet);
+                    console.log("could not parse tweet: "+tweet);
                 }
                 if (data) {
                     Engine.addRandomlyPositionedTweet(data);
@@ -54,7 +59,7 @@ var Client = (function() {
         });
 
         socket.on('disconnect', function() {
-            //console.log('disconnect');
+            console.log('disconnect');
             socket.removeAllListeners('tweet');
         });
     }
