@@ -14,7 +14,7 @@ html {
     color:#eee; /* Grey for IE */
     color:rgba(230,230,230,1); /* White for good browsers */
     text-shadow:0 0 5px rgba(0,0,0,0.4); /* Subtle shadow for good browsers */
-    z-index:100;
+    z-index:2000; /* Bootstrap 2.x has a crazy nav index of 1030 we need to trump */
     cursor:default;
 }
 
@@ -24,7 +24,7 @@ html {
 }
 
 .tweet {
-    z-index:200;
+    z-index:2001; /* Bootstrap 2.x has a crazy nav index of 1030 we need to trump */
     font-size:14px;
     font-family:Helvetica;
     background:#000;
@@ -124,7 +124,7 @@ html {
     -moz-border-top-left-radius:8px;
     background:#111;
     color:#fff;
-    z-index:300;
+    z-index:2002;
 }
 
 #actions a {
