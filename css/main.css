@@ -10,11 +10,9 @@ html {
 .flake {
     margin:0;
     padding:0;
-    /*color:#000;*/
-    color:#eee; /* Grey for IE */
-    color:rgba(230,230,230,1); /* White for good browsers */
+    color:#fff; /* for IE */
+    color:rgba(255,255,255,1); /* White for good browsers */
     text-shadow:0 0 5px rgba(0,0,0,0.4); /* Subtle shadow for good browsers */
-    z-index:2000; /* Bootstrap 2.x has a crazy nav index of 1030 we need to trump */
     cursor:default;
 }
 
@@ -24,7 +22,6 @@ html {
 }
 
 .tweet {
-    z-index:2001; /* Bootstrap 2.x has a crazy nav index of 1030 we need to trump */
     font-size:14px;
     font-family:Helvetica;
     background:#000;
