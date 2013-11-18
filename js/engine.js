@@ -68,22 +68,24 @@ var Engine = (function(win, doc) {
                 break;
             }
         }
-    }
+    };
 
     that.loop = function() {
         _tickTime = new Date().getTime();
         if (_tickTime >= _lastWeatherReport + _reportInterval) {
             // update!
             var _flakesPerSec = _flakesSinceReport / (_reportInterval / 1000);
+            var weatherIndex;
             for (var i in _weatherLevels) {
                 if (_flakesPerSec <= i) {
-                    if ($("#weather span").html() != _weatherLevels[i]) {
-                        $("#weather span").fadeOut(500, function() {
-                            $(this).html(_weatherLevels[i]).fadeIn(500);
-                        });
-                    }
+                    weatherIndex = i;
                     break;
                 }
+            }
+            if ($("#weather span").html() != _weatherLevels[weatherIndex]) {
+                $("#weather span").fadeOut(500, function() {
+                    $(this).html(_weatherLevels[weatherIndex]).fadeIn(500);
+                });
             }
             _flakesSinceReport = 0;
             _lastWeatherReport = _tickTime;
@@ -94,7 +96,7 @@ var Engine = (function(win, doc) {
 
         that.tick();
         that.render();
-    }
+    };
 
     that.tick = function() {
         if (!_settings.snowflakes) {
@@ -106,7 +108,7 @@ var Engine = (function(win, doc) {
             flake = _flakes[i];
             flake.tick(_delta);
 
-            if (!flake.isDying() && flake.getProjectedBottom(2500) >= _height) {
+            if (!flake.isDying() && flake.getProjectedBottom(3000) >= _height) {
                 flake.startDeath(2000);
             }
 
@@ -114,7 +116,7 @@ var Engine = (function(win, doc) {
                 _flakes.splice(i, 1);
             }
         }
-    }
+    };
 
     that.render = function() {
         var i = _flakes.length;
@@ -123,14 +125,14 @@ var Engine = (function(win, doc) {
                 _flakes[i].render();
             //}
         }
-    }
+    };
 
     that.updateViewport = function() {
         _viewport.x = _win.scrollLeft();
         _viewport.y = _win.scrollTop();
         _viewport.w = _win.width();
         _viewport.h = _win.height();
-    }
+    };
 
     that.addControlPanel = function() {
         that.getElement().prepend(
@@ -147,7 +149,7 @@ var Engine = (function(win, doc) {
             var setting = $(this).attr('class');
             _settings[setting] = !_settings[setting];
             var enabled = _settings[setting];
-            
+
             switch (setting) {
                 case 'snowflakes':
                     if (enabled) {
@@ -192,7 +194,7 @@ var Engine = (function(win, doc) {
 
             $(this).children("span").html(enabled ? "on" : "off");
         });
-    }
+    };
 
     that.start = function() {
         _lastWeatherReport = new Date().getTime();
@@ -210,21 +212,22 @@ var Engine = (function(win, doc) {
         });
 
         tick();
-    }
+    };
 
     that.getElement = function() {
         return _element;
-    }
+    };
 
     that.getViewport = function() {
         return _viewport;
-    }
+    };
 
     that.setting = function(setting) {
         return !!_settings[setting];
-    }
+    };
 
     return that;
+
 })(this, document);
 
 var animFrame = null;

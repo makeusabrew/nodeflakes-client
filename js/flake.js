@@ -221,13 +221,15 @@ Flake.prototype = {
         // 2. fade out the tweet
         // 3. remove the tweet from DOM and set the isVisible boolean back to false
         var that = this;
-        elem.fadeIn(1000, function() {
+        var fadeSpeed = 500;
+        var showTime = 2500;
+        elem.fadeIn(fadeSpeed, function() {
             setTimeout(function() {
-                elem.fadeOut(1000, function() {
+                elem.fadeOut(fadeSpeed, function() {
                     elem.remove();
                     that.tweetVisible = false;
                 });
-            }, 3000);
+            }, showTime);
         });
     },
 
