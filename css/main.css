@@ -31,7 +31,6 @@ body { /* @todo improve this filth */
     min-width:200px;
     padding:0.75em;
     border-radius:18px;
-    -moz-border-radius:18px;
 }
 
 .tweet a {
@@ -69,7 +68,7 @@ body { /* @todo improve this filth */
     from {
         -webkit-transform: rotate(0deg);
     }
-    to { 
+    to {
         -webkit-transform: rotate(360deg);
     }
 }
@@ -78,39 +77,39 @@ body { /* @todo improve this filth */
     from {
         -webkit-transform: rotate(360deg);
     }
-    to { 
+    to {
         -webkit-transform: rotate(0deg);
     }
 }
 
-@-moz-keyframes rotate-clockwise {
+@keyframes rotate-clockwise {
     from {
-        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
     }
-    to { 
-        -moz-transform: rotate(360deg);
+    to {
+        transform: rotate(360deg);
     }
 }
 
-@-moz-keyframes rotate-anticlockwise {
+@keyframes rotate-anticlockwise {
     from {
-        -moz-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-    to { 
-        -moz-transform: rotate(0deg);
+    to {
+        transform: rotate(0deg);
     }
 }
 
 .threedee {
     -webkit-transform: translateZ(0);
-    -moz-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .animated {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 #actions {
@@ -118,17 +117,17 @@ body { /* @todo improve this filth */
     bottom:0;
     right:0;
     padding:0.25em;
-    border-top-left-radius:8px;
-    -moz-border-top-left-radius:8px;
+    border-top-left-radius:2px;
     background:#111;
     color:#fff;
     z-index:2002;
+    font-size:90%;
 }
 
 #actions a {
     color:#fff;
     text-decoration:none;
-    margin: 1em;
+    margin: 0.5em;
 }
 
 #actions a:hover {
