@@ -109,8 +109,8 @@ Flake.prototype = {
         this.elem.css({
             "-webkit-animation-name": "rotate-"+this.rotationDir,
             "-webkit-animation-duration": this.rotationSpeed+"s",
-            "-moz-animation-name": "rotate-"+this.rotationDir,
-            "-moz-animation-duration": this.rotationSpeed+"s"
+            "animation-name": "rotate-"+this.rotationDir,
+            "animation-duration": this.rotationSpeed+"s"
         }).addClass("animated");
     },
 

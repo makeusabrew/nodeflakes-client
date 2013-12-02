@@ -33,14 +33,14 @@ var Engine = (function(win, doc) {
         _win = $(win);
 
     that.addRandomlyPositionedTweet = function(data) {
-        var size = Math.round(10 + (data.user.followers_count / 400));
+        var size = Math.round(11 + (data.user.followers_count / 500));
 
         if (size > 250) {
             size = 250;
         }
 
         var x = Math.floor(
-            10 + Math.random() * _win.width() - size - 20
+            11 + Math.random() * _win.width() - size - 22
         );
 
         // we used to make Y a bit random, but if users are looking out for their tweets
@@ -73,6 +73,7 @@ var Engine = (function(win, doc) {
 
     that.loop = function() {
         _tickTime = new Date().getTime();
+        /*
         if (_tickTime >= _lastWeatherReport + _reportInterval) {
             // update!
             var _flakesPerSec = _flakesSinceReport / (_reportInterval / 1000);
@@ -91,6 +92,7 @@ var Engine = (function(win, doc) {
             _flakesSinceReport = 0;
             _lastWeatherReport = _tickTime;
         }
+        */
         // we want a delta in *seconds*, to make it easier to scale our values
         _delta = (_tickTime - _lastTick) / 1000;
         _lastTick = _tickTime;
@@ -138,11 +140,8 @@ var Engine = (function(win, doc) {
     that.addControlPanel = function() {
         that.getElement().prepend(
             "<div id='actions'>"+
-                "<span>Current snowfall: <span id='weather'><span>none</span></span>"+
                 "<a class='snowflakes' href='#'>Snowflakes: <span>on</span></a>"+
-                "<a class='sounds' href='#'>#nodeflakes sounds: <span>on</span></a>"+
-                "<a class='animations' href='#'>CSS Animations: <span>on</span></a>"+
-                "<a class='acceleration' href='#'>3D Acceleration: <span>on</span></a>"+
+                "<a class='sounds' href='#'>Sounds: <span>on</span></a>"+
             "</div>"
         );
         $("#actions a").click(function(e) {
@@ -179,7 +178,9 @@ var Engine = (function(win, doc) {
                     } else {
                         $(".flake").removeClass("animated").css({
                             "-webkit-animation-name": "",
-                            "-webkit-animation-duration":""
+                            "-webkit-animation-duration":"",
+                            "animation-name": "",
+                            "animation-duration":""
                         });
                     }
                     break;
