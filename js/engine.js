@@ -33,7 +33,7 @@ var Engine = (function(win, doc) {
         _win = $(win);
 
     that.addRandomlyPositionedTweet = function(data) {
-        var size = Math.round(9 + (data.user.followers_count / 200));
+        var size = Math.round(10 + (data.user.followers_count / 400));
 
         if (size > 250) {
             size = 250;
